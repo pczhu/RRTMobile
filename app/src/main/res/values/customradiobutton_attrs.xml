@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomRadioButton">
+        <attr name="buttonpic" format="reference"/>
+        <attr name="buttontxt" format="string"/>
+        <attr name="message_num" format="integer"/>
+        <attr name="message_visibility" format="boolean"/>
+    </declare-styleable>
+</resources>

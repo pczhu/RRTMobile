@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:fitsSystemWindows="true"
+              android:clipToPadding="true"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/main_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"/>
+    <cn.mobile.renrentou.controller.widget.radio.CustomLinearlayout
+        android:id="@+id/main_custom_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <cn.mobile.renrentou.controller.widget.radio.CustomRadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:buttonpic="@drawable/main_radio_main_bg"
+            app:buttontxt="主页"
+            app:message_num="99"/>
+
+        <cn.mobile.renrentou.controller.widget.radio.CustomRadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:buttonpic="@drawable/main_radio_project_bg"
+            app:buttontxt="找项目"
+            app:message_num="99"/>
+
+        <cn.mobile.renrentou.controller.widget.radio.CustomRadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:buttonpic="@drawable/main_radio_chat_bg"
+            app:buttontxt="交流"
+            app:message_num="99"
+            app:message_visibility="true"/>
+
+        <cn.mobile.renrentou.controller.widget.radio.CustomRadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:buttonpic="@drawable/main_radio_center_bg"
+            app:buttontxt="个人中心"
+            app:message_num="99"/>
+    </cn.mobile.renrentou.controller.widget.radio.CustomLinearlayout>
+</LinearLayout>
