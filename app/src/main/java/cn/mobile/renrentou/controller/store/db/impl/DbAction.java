@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 
 import org.xutils.DbManager;
+import org.xutils.common.util.KeyValue;
 import org.xutils.db.sqlite.WhereBuilder;
 import org.xutils.db.table.DbModel;
 import org.xutils.ex.DbException;
@@ -113,18 +114,7 @@ public class DbAction implements DbData,UserData,WelcomeInfoData {
         return all;
     }
 
-    @Override
-    public boolean setColumn(Class clz, String name, String sign, String target,String... value) {
-        try {
-            db.update(clz, WhereBuilder.b(name, sign, target),value);
 
-        } catch (DbException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
-    }
 
 
     @Override

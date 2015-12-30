@@ -2,13 +2,11 @@ package cn.mobile.renrentou.controller.ui.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
 
 import butterknife.InjectView;
 import cn.mobile.renrentou.R;
@@ -33,7 +31,8 @@ public class MainFragment extends BaseFragment {
 //    private TextView title;
 //    @InjectView(R.id.title_right)
 //    private TextView rightBtn;
-    @InjectView(R.id.listview_main)
+
+    @ViewInject(R.id.listview_main)
     private ListView listview;
 
     private Activity activity;
@@ -45,16 +44,10 @@ public class MainFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(injected){
-            listview.setClipToPadding(false);
-            setInsets(activity,listview);
-        }
+
     }
+
+
 }

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -34,6 +36,9 @@ public class MainActivity extends BaseActivity implements RadioChangedListener{
 
     @ViewInject(R.id.main_custom_radio_group)
     private CustomLinearlayout customLinearlayout;
+    @ViewInject(R.id.toolbar)
+    private Toolbar toolbar;
+
     //四个Fragment
     private MainFragment mainFragment;
     private ProjectFragment projectFragment;
@@ -43,12 +48,17 @@ public class MainActivity extends BaseActivity implements RadioChangedListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        x.view().inject(this);
-        setSwipeBackEnable(false);
-        initFragmentView();
-        customLinearlayout.setOnRadioChangedListener(this);
-        customLinearlayout.setChildStatue(0);
+        setToolBar(toolbar,true);//初始化toolbar
+        setSwipeBackEnable(false);//MainActivity不侧滑动
+        initFragmentView();//初始化Fragment布局
+        customLinearlayout.setOnRadioChangedListener(this);//主菜单监听
+        customLinearlayout.setChildStatue(0);//设置默认主菜单为主页面
+        setTitle("人人投");
     }
+
+    /**
+     * 初始化Fragment
+     */
     private void initFragmentView(){
         mainFragment = new MainFragment();
         projectFragment = new ProjectFragment();
@@ -80,18 +90,22 @@ public class MainActivity extends BaseActivity implements RadioChangedListener{
                 }
                 fragmentTransaction.hide(currentFragment).show(mainFragment);
                 currentFragment = mainFragment;
+                setTitle("主页");
                 break;
             case 1:
                 fragmentTransaction.hide(currentFragment).show(projectFragment);
                 currentFragment = projectFragment;
+                setTitle("找项目");
                 break;
             case 2:
                 fragmentTransaction.hide(currentFragment).show(chatFragment);
                 currentFragment = chatFragment;
+                setTitle("聊天");
                 break;
             case 3:
                 fragmentTransaction.hide(currentFragment).show(centerFragment);
                 currentFragment = centerFragment;
+                setTitle("个人中心");
                 break;
             default:
                 break;

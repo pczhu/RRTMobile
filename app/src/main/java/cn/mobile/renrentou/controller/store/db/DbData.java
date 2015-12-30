@@ -46,5 +46,5 @@ public interface DbData {
     public List<Object> getDataByObjectNameAndKey(Class clz, String name, String sign, String target);
 
 
-    public boolean setColumn(Class clz, String name, String sign, String target, String... value);
+    //public boolean setColumn(Class clz, String name, String sign, String target, String... value);
 }

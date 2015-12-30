@@ -1,7 +1,6 @@
 package cn.mobile.renrentou.controller.ui.fragment.basefragment;
 
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,15 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.xutils.x;
 
-import cn.mobile.renrentou.R;
 
 /**
  * 名称：${FILE_NAME}
@@ -29,7 +25,7 @@ import cn.mobile.renrentou.R;
  * 修改历史：
  */
 public class BaseFragment extends Fragment {
-    protected boolean injected = false;
+    private boolean injected = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +40,7 @@ public class BaseFragment extends Fragment {
             x.view().inject(this, this.getView());
         }
     }
+
 
     /**
      * 设置页面标题
@@ -68,11 +65,5 @@ public class BaseFragment extends Fragment {
             }
         });
     }
-    public static void setInsets(Activity context, View view) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-            return;
-        SystemBarTintManager tintManager = new SystemBarTintManager(context);
-        SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
-        view.setPadding(0, config.getPixelInsetTop(true), config.getPixelInsetRight(), config.getPixelInsetBottom());
-    }
+
 }
