@@ -26,6 +26,13 @@ import org.xutils.x;
  */
 public class BaseFragment extends Fragment {
     private boolean injected = false;
+    protected Activity activity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

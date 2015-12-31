@@ -35,13 +35,6 @@ public class MainFragment extends BaseFragment {
     @ViewInject(R.id.listview_main)
     private ListView listview;
 
-    private Activity activity;
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
-    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

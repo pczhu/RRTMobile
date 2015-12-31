@@ -11,12 +11,12 @@
 
     <ImageView
         android:id="@+id/title_pic"
-        android:layout_width="wrap_content"
+        android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_centerHorizontal="true"
         android:background="#ffffff"
         android:focusable="false"
-        android:scaleType="centerInside"/>
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/title_txt"

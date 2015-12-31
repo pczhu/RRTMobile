@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <declare-styleable name="CustomRadioButton">
         <attr name="buttonpic" format="reference"/>
         <attr name="buttontxt" format="string"/>
         <attr name="message_num" format="integer"/>
         <attr name="message_visibility" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="twowayview_TwoWayLayoutManager">
+        <attr name="android:orientation" tools:ignore="ResourceName"/>
     </declare-styleable>
 </resources>
