@@ -13,7 +13,9 @@
             <option value="$PROJECT_DIR$/FlycoAnimation_Lib" />
             <option value="$PROJECT_DIR$/FlycoDialog_Lib" />
             <option value="$PROJECT_DIR$/FlycoRoundView_Lib" />
+            <option value="$PROJECT_DIR$/TuSDK" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/xedittext" />
           </set>
         </option>
       </GradleProjectSettings>

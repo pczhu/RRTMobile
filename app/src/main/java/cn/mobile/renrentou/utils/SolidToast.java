@@ -14,6 +14,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cn.mobile.renrentou.R;
 
@@ -46,6 +47,7 @@ public class SolidToast {
     private boolean mIsShowing;
     private boolean mIsReused;
     private int mBackgroundColor;
+    private int mTextColor;
     private CharSequence mMsg;
 
     public SolidToast(Context context) {
@@ -328,5 +330,40 @@ public class SolidToast {
             mIsShowing = false;
         }
     }
-
+    public SolidToast setTextColor(int colorId){
+        this.mTextColor = getToastView().getResources().getColor(colorId);
+        TextView textView = (TextView) getToastView().findViewById(R.id.toast_msg);
+        textView.setTextColor(mTextColor);
+        return this;
+    }
+    private static Toast toast = null;
+    public static void showToast(Context context, String msg) {
+        if(StringUtils.isEmpty(msg) || context == null){
+            return;
+        }
+        if (toast == null) {
+            toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(msg);
+        }
+        toast.show();
+    }
+    public static void showToast(Context context, int strId) {
+        if(strId == 0){
+            return;
+        }
+        if(context == null){
+            return;
+        }
+        String msg = context.getString(strId);
+        if(StringUtils.isEmpty(msg)){
+            return;
+        }
+        if (toast == null) {
+            toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(msg);
+        }
+        toast.show();
+    }
 }

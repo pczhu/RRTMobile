@@ -1,4 +1,4 @@
-package cn.mobile.renrentou.controller.ui.fragment;
+package cn.mobile.renrentou.controller.ui.fragment.main;
 
 import org.xutils.view.annotation.ContentView;
 

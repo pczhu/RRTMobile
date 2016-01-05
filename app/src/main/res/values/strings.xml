@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">RRTMobile</string>
+    <string name="simple_AlbumMultipleComponent">相册组件 (带相机)</string>
+    <string name="simple_EditAvatarComponent">图片设置</string>
+    <string name="simple_EditAdvancedComponent">高级图片编辑</string>
+
+    <!--LoginFragment-->
+    <string name="login_username_empty">请输入您的邮箱地址或者电话号码</string>
+    <string name="login_password_empty">请输入您的密码</string>
 </resources>

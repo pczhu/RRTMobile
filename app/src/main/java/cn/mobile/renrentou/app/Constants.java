@@ -30,7 +30,7 @@ public class Constants {
 	public static final String RRTLATITUDE = "39.902116";//纬度
 
 //###########################本地存储key####################################################
-
+	public static final String Login_Tag = "login_tag";
 
 //############################################各种密匙############################################
 	//key 微信

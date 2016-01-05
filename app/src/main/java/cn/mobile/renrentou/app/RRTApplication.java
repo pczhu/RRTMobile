@@ -1,6 +1,7 @@
 package cn.mobile.renrentou.app;
 
 import android.app.Application;
+import android.content.Context;
 
 import cn.mobile.renrentou.app.config.InitEveryDependence;
 import cn.mobile.renrentou.utils.LogUtils;
@@ -15,9 +16,11 @@ import cn.mobile.renrentou.utils.LogUtils;
  * 修改历史：
  */
 public class RRTApplication extends Application {
+    private static Context mContext;
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = getContext();
         initLog();
 
         initSDK();
@@ -30,10 +33,13 @@ public class RRTApplication extends Application {
         LogUtils.allowI = false;
         LogUtils.allowV = false;
         LogUtils.allowV = false;
-        LogUtils.allowString = new String[]{"MainActivity"};
+        LogUtils.allowString = new String[]{"LoginFragment","CenterFragment"};
     }
 
     private void initSDK(){
         InitEveryDependence.getInstance(this).start();
+    }
+    public static Context getContext(){
+        return mContext;
     }
 }

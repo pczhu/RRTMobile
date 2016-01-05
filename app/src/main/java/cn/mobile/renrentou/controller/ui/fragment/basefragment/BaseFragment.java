@@ -2,6 +2,7 @@ package cn.mobile.renrentou.controller.ui.fragment.basefragment;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,13 @@ import org.xutils.x;
 public class BaseFragment extends Fragment {
     private boolean injected = false;
     protected Activity activity;
+    protected Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
 
     @Override
     public void onAttach(Activity activity) {

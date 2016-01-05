@@ -1,4 +1,4 @@
-package cn.mobile.renrentou.controller.ui.fragment;
+package cn.mobile.renrentou.controller.ui.fragment.main;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.ListView;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
-import butterknife.InjectView;
 import cn.mobile.renrentou.R;
 import cn.mobile.renrentou.controller.ui.fragment.basefragment.BaseFragment;
 

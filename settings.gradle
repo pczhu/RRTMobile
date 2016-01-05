@@ -1,1 +1,1 @@
-include ':app',':FlycoRoundView_Lib',"FlycoAnimation_Lib",'FlycoDialog_Lib'
+include ':app',':FlycoRoundView_Lib',"FlycoAnimation_Lib",'FlycoDialog_Lib','TuSDK','xedittext'

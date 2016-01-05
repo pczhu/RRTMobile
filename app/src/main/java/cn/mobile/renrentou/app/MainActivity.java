@@ -2,21 +2,18 @@ package cn.mobile.renrentou.app;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
 import cn.mobile.renrentou.R;
 import cn.mobile.renrentou.controller.ui.activity.baseactivity.BaseActivity;
-import cn.mobile.renrentou.controller.ui.fragment.CenterFragment;
-import cn.mobile.renrentou.controller.ui.fragment.ChatFragment;
-import cn.mobile.renrentou.controller.ui.fragment.MainFragment;
-import cn.mobile.renrentou.controller.ui.fragment.ProjectFragment;
+import cn.mobile.renrentou.controller.ui.fragment.main.CenterFragment;
+import cn.mobile.renrentou.controller.ui.fragment.main.ChatFragment;
+import cn.mobile.renrentou.controller.ui.fragment.main.MainFragment;
+import cn.mobile.renrentou.controller.ui.fragment.main.ProjectFragment;
 import cn.mobile.renrentou.controller.widget.radio.CustomLinearlayout;
 import cn.mobile.renrentou.controller.widget.radio.RadioChangedListener;
 import cn.mobile.renrentou.utils.LogUtils;
@@ -130,5 +127,20 @@ public class MainActivity extends BaseActivity implements RadioChangedListener{
         }else if(centerFragment == null && fragment instanceof CenterFragment){
             centerFragment = (CenterFragment)fragment;
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AppManager.getAppManager().addActivity(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        AppManager.getAppManager().removeActivity(this);
+    }
+    public void onSaveInstanceState(Bundle outState) {
+
     }
 }

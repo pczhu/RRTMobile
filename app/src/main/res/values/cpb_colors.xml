@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cpb_grey">#ffdedede</color>
+    <color name="cpb_blue">#7f778899</color>
+    <color name="cpb_blue_dark">#ff778899</color>
+    <color name="cpb_red">#7f708090</color>
+    <color name="cpb_red_dark">#7fcd3a3a</color>
+    <color name="cpb_green">#7f99cc00</color>
+    <color name="cpb_green_dark">#7f6d9b00</color>
+    <color name="cpb_white">@android:color/white</color>
+</resources>

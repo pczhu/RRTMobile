@@ -14,10 +14,13 @@ import cn.mobile.renrentou.domain.UserInfo;
  */
 public interface UserData {
 
-    public void setUserInfo(UserInfo userInfo);
-    public UserInfo getUserInfo(String id);
-    public UserInfo getUserInfo(String key, String value);
-    public String getUserName(String id);
-    public String getUserAge(String id);
-    public String getHeadPic(String id);
+    public void setUserInfo(UserInfo.UserDataEntity userInfo);
+    public UserInfo.UserDataEntity getUserInfo();
+    public UserInfo.UserDataEntity getUserInfo(String id);
+    public UserInfo.UserDataEntity getUserInfo(String key, String value);
+    public String getRealName(String id);
+    public String isIdcard(String id);
+    public String getFace(String id);
+    public String getUsertype(String id);
+    public boolean is_Auto_Yeepay(String id);
 }

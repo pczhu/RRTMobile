@@ -6,7 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/FlycoDialog_Lib/FlycoDialog_Lib.iml" filepath="$PROJECT_DIR$/FlycoDialog_Lib/FlycoDialog_Lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/FlycoRoundView_Lib/FlycoRoundView_Lib.iml" filepath="$PROJECT_DIR$/FlycoRoundView_Lib/FlycoRoundView_Lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/RRTMobile.iml" filepath="$PROJECT_DIR$/RRTMobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TuSDK/TuSDK.iml" filepath="$PROJECT_DIR$/TuSDK/TuSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xedittext/xedittext.iml" filepath="$PROJECT_DIR$/xedittext/xedittext.iml" />
     </modules>
   </component>
 </project>

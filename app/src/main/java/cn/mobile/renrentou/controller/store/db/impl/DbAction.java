@@ -15,8 +15,11 @@ import java.util.Calendar;
 import java.util.List;
 
 
+import cn.mobile.renrentou.controller.store.db.LoginData;
+import cn.mobile.renrentou.domain.LoginInfo;
 import cn.mobile.renrentou.domain.UserInfo;
 import cn.mobile.renrentou.domain.WelcomeInfo;
+import cn.mobile.renrentou.domain.dbentity.TokenEntity;
 import cn.mobile.renrentou.utils.LogUtils;
 import cn.mobile.renrentou.utils.MyLong;
 import cn.mobile.renrentou.controller.store.db.DbData;
@@ -31,11 +34,12 @@ import cn.mobile.renrentou.controller.store.db.WelcomeInfoData;
  * 版本：V1.0
  * 修改历史：
  */
-public class DbAction implements DbData,UserData,WelcomeInfoData {
+public class DbAction implements DbData,UserData,WelcomeInfoData,LoginData {
     private static Context mContext;
     private static DbAction dbAction = null;
     private static DbManager db;
     private static DbManager.DaoConfig daoConfig;
+    private static final String defaultCode = "0";
     public static DbAction getInstance(Context context){
         DbAction.mContext = context;
         if( dbAction == null){
@@ -118,44 +122,75 @@ public class DbAction implements DbData,UserData,WelcomeInfoData {
 
 
     @Override
-    public void setUserInfo(UserInfo userInfo) {
+    public void setUserInfo(UserInfo.UserDataEntity userInfo) {
+        try {
+            db.dropTable(UserInfo.UserDataEntity.class);
+        } catch (DbException e) {
+            e.printStackTrace();
+            return;
+        }
         setObject(userInfo);
     }
 
     @Override
-    public UserInfo getUserInfo(String id) {
-        List<Object> result = getDataByObjectNameAndKey(UserInfo.class, "id", "=", id);
-        if(result != null && result.size() == 1){
-            return (UserInfo) result.get(0);
+    public UserInfo.UserDataEntity getUserInfo() {
+        List<Object> result = getDataByObjectName(UserInfo.UserDataEntity.class);
+        if(result != null){
+            return (UserInfo.UserDataEntity)result.get(0);
         }
         return null;
     }
 
     @Override
-    public UserInfo getUserInfo(String key, String value) {
-        List<Object> result = getDataByObjectNameAndKey(UserInfo.class, "key", "=", value);
+    public UserInfo.UserDataEntity getUserInfo(String id) {
+        if(defaultCode.equals(id)){
+            return getUserInfo();
+        }
+        List<Object> result = getDataByObjectNameAndKey(UserInfo.UserDataEntity.class, "id", "=", id);
         if(result != null && result.size() == 1){
-            return (UserInfo) result.get(0);
+            return (UserInfo.UserDataEntity) result.get(0);
         }
         return null;
     }
 
     @Override
-    public String getUserName(String id) {
-        UserInfo userinfo = getUserInfo(id);
-        return (userinfo != null?userinfo.getName():null);
+    public UserInfo.UserDataEntity getUserInfo(String key, String value) {
+        List<Object> result = getDataByObjectNameAndKey(UserInfo.UserDataEntity.class, key, "=", value);
+        if(result != null && result.size() == 1){
+            return (UserInfo.UserDataEntity) result.get(0);
+        }
+        return null;
     }
 
     @Override
-    public String getUserAge(String id) {
-        UserInfo userinfo = getUserInfo(id);
-        return (userinfo != null?userinfo.getAge():null);
+    public String getRealName(String id) {
+        UserInfo.UserDataEntity userinfo = getUserInfo(id);
+        return (userinfo != null?userinfo.getRealname():null);
     }
 
     @Override
-    public String getHeadPic(String id) {
-        UserInfo userinfo = getUserInfo(id);
-        return (userinfo != null?userinfo.getHeadpic():null);
+    public String isIdcard(String id) {
+        UserInfo.UserDataEntity userinfo = getUserInfo(id);
+        return (userinfo != null?userinfo.getIs_idcard():null);
+
+    }
+
+    @Override
+    public String getFace(String id) {
+        UserInfo.UserDataEntity userinfo = getUserInfo(id);
+        return (userinfo != null?userinfo.getFace():null);
+    }
+
+    @Override
+    public String getUsertype(String id) {
+        UserInfo.UserDataEntity userinfo = getUserInfo(id);
+        return (userinfo != null?userinfo.getUsertype():null);
+    }
+
+    @Override
+    public boolean is_Auto_Yeepay(String id) {
+        UserInfo.UserDataEntity userinfo = getUserInfo(id);
+        return (userinfo != null?(userinfo.getIs_auto_yeepay().equals(0) ?false:true):false);
     }
 
 
@@ -195,5 +230,44 @@ public class DbAction implements DbData,UserData,WelcomeInfoData {
             }
         }
         return null;
+    }
+
+    @Override
+    public String getAssessToken() {
+        List<Object> result = getDataByObjectName(TokenEntity.class);
+        if(result != null && result.size() == 1){
+            return ((TokenEntity) result.get(0)).getAccess_token();
+        }
+        return null;
+    }
+
+    @Override
+    public LoginInfo.DataEntity.UserinfoEntity getLoginUserInfo() {
+        List<Object> result = getDataByObjectName(LoginInfo.DataEntity.UserinfoEntity.class);
+        if(result != null && result.size() == 1){
+            return (LoginInfo.DataEntity.UserinfoEntity) result.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public void setToken(TokenEntity tokenEntity) {
+        try {
+            db.dropTable(TokenEntity.class);
+        } catch (DbException e) {
+            e.printStackTrace();
+            return;
+        }
+        setObject(tokenEntity);
+    }
+
+    @Override
+    public void setLoginUserInfo(LoginInfo.DataEntity.UserinfoEntity loginUserInfo) {
+        try {
+            db.dropTable(LoginInfo.DataEntity.UserinfoEntity.class);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        setObject(loginUserInfo);
     }
 }

@@ -11,7 +11,7 @@ import android.content.SharedPreferences;
  * 版本：V1.0
  * 修改历史：
  */
-public interface ShData {
+public interface ShareStoreData {
 
     public SharedPreferences getShare(String name);
     /**
@@ -40,4 +40,8 @@ public interface ShData {
     public int getInt(String shKey);
 
     public void setInt(String shKey, int value);
+
+    public boolean isLogin();
+
+    public void setIsLogin(boolean flag);
 }

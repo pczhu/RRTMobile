@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- 0.1	19
+         0.2	33
+         0.3	4C
+         0.4	66
+         0.5	7F
+         0.6	99
+         0.7	B2
+         0.8	C8
+         0.9	E5 -->
     <color name="white">#FFFFFF</color><!--白色 -->
     <color name="ivory">#FFFFF0</color><!--象牙色 -->
     <color name="lightyellow">#FFFFE0</color><!--亮黄色-->
@@ -151,4 +161,5 @@
     <color name="divider">#d8d8d8</color><!--边线色 -->
     <color name="textcolor">#999999</color><!--文字色-->
     <color name="bgcolor">#f1f1f1</color><!--背景色-->
+    <color name="btn_bgcolor">#999999</color>
 </resources>
