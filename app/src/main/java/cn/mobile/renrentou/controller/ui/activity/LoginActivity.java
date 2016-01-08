@@ -14,6 +14,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.mobile.renrentou.R;
+import cn.mobile.renrentou.app.AppManager;
 import cn.mobile.renrentou.controller.ui.activity.baseactivity.BaseActivity;
 import cn.mobile.renrentou.controller.ui.fragment.login.LoginFragment;
 import cn.mobile.renrentou.controller.ui.fragment.login.RegisterFragment;
@@ -93,7 +94,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void run() {
                 isInAnimation = false;
             }
-        },1000);
+        }, 1000);
     }
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
@@ -111,5 +112,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
     public void onSaveInstanceState(Bundle outState) {
 
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AppManager.getAppManager().addActivity(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        AppManager.getAppManager().removeActivity(this);
     }
 }

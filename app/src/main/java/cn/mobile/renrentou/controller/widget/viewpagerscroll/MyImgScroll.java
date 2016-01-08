@@ -1,5 +1,6 @@
 package cn.mobile.renrentou.controller.widget.viewpagerscroll;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,9 +19,11 @@ import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 import cn.mobile.renrentou.R;
+import cn.mobile.renrentou.domain.AdData;
 import cn.mobile.renrentou.domain.AdvertiseResponse;
 import cn.mobile.renrentou.utils.ImageUtils;
 
@@ -52,7 +55,7 @@ public class MyImgScroll extends ViewPager{
 	/**
 	 * 轮播数据集合
 	 */
-	private List<AdvertiseResponse.AdvertisementInfo> advertisementInfos = null;
+	private List<AdData.DataEntity> advertisementInfos = null;
 
 	/**
 	 * 内容适配器
@@ -76,8 +79,6 @@ public class MyImgScroll extends ViewPager{
 	 * 
 	 * @param mainActivity
 	 *            显示广告的主界面
-	 * @param imgList
-	 *            图片列表, 不能为null ,最少一张
 	 * @param scrollTime
 	 *            滚动间隔 ,0为不滚动
 	 * @param ovalLayout
@@ -90,24 +91,40 @@ public class MyImgScroll extends ViewPager{
 	 *            ovalLayout为空时 写0, 圆点layout XMl 选中时的动画
 	 * @param normalId
 	 *            ovalLayout为空时 写0, 圆点layout XMl 正常时背景
-	 * @param advertisementInfo 
+	 * @param addata
 	 */
 	@SuppressLint("ClickableViewAccessibility")
-	public void start(Activity mainActivity, List<ImageView> imgList,
+	public void start(Activity mainActivity,
 			int scrollTime, LinearLayout ovalLayout, int ovalLayoutId,
-			int ovalLayoutItemId, int focusedId, int normalId, List<AdvertiseResponse.AdvertisementInfo> advertisementInfo) {
+			int ovalLayoutItemId, int focusedId, int normalId, List<AdData.DataEntity> addata) {
 		mActivity = mainActivity;
-		mListViews = imgList;
 		mScrollTime = scrollTime;
-		this.advertisementInfos = advertisementInfo;
+		this.advertisementInfos = addata;
+
+
+		if(mListViews == null) {
+			mListViews = new ArrayList<ImageView>();
+		}else {
+			mListViews.clear();
+		}
+		for (int i = 0; i < addata.size(); i++) {
+			ImageView imageView = new ImageView(getContext());
+			imageView.setId(i);
+			AdData.DataEntity advertisementInfo = addata.get(i);
+			String url = advertisementInfo.getLink();
+			imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+			mListViews.add(imageView);
+		}
+
+
 
 		// 设置圆点
 		setOvalLayout(ovalLayout, ovalLayoutId, ovalLayoutItemId, focusedId,
 				normalId);
-		myPagerAdapter = new MyPagerAdapter(advertisementInfos);
+		myPagerAdapter = new MyPagerAdapter(addata);
 		this.setAdapter(myPagerAdapter);// 设置适配器
 
-		if (scrollTime != 0 && imgList.size() > 1) {
+		if (scrollTime != 0 && mListViews.size() > 1) {
 			// 设置滑动动画时间  ,如果用默认动画时间可不用 ,反射技术实现
 			new FixedSpeedScroller(mActivity).setDuration(this, 700);
 			startTimer();
@@ -137,7 +154,7 @@ public class MyImgScroll extends ViewPager{
 	 * @param advertisementInfo
 	 * 					轮播图数据集合
 	 */
-	public void notifyByMySelf(List<AdvertiseResponse.AdvertisementInfo> advertisementInfo){
+	public void notifyByMySelf(List<AdData.DataEntity> advertisementInfo){
 		this.advertisementInfos = advertisementInfo;
 		if(myPagerAdapter != null){
 			myPagerAdapter.notifyDataSetChanged();
@@ -261,8 +278,8 @@ public class MyImgScroll extends ViewPager{
 		/**
 		 * 轮播数据集合
 		 */
-		private List<AdvertiseResponse.AdvertisementInfo> advertisementInfos;
-		public MyPagerAdapter(List<AdvertiseResponse.AdvertisementInfo> advertisementInfos) {
+		private List<AdData.DataEntity> advertisementInfos;
+		public MyPagerAdapter(List<AdData.DataEntity> advertisementInfos) {
 			this.advertisementInfos = advertisementInfos;
 		}
 
@@ -290,7 +307,8 @@ public class MyImgScroll extends ViewPager{
 				((ViewGroup)view).removeView(mListViews.get(i % mListViews.size()));
 			}
 			((ViewPager) v).addView(mListViews.get(i % mListViews.size()), 0);
-			x.image().bind(mListViews.get(i % mListViews.size()), advertisementInfos.get(i % mListViews.size()).getImg(), ImageUtils.getImageOptions(R.mipmap.banner_image_default));
+			x.image().bind(mListViews.get(i % mListViews.size()), advertisementInfos.get(i % mListViews.size()).getImg(),
+					ImageUtils.getImageOptions(R.mipmap.banner_image_default));
 			return mListViews.get(i % mListViews.size());
 		}
 

@@ -1,6 +1,7 @@
 package cn.mobile.renrentou.app;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,8 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.mobile.renrentou.R;
+import cn.mobile.renrentou.controller.modul.action.UserInfoAction;
+import cn.mobile.renrentou.controller.store.sp.impl.ShareStoreAction;
 import cn.mobile.renrentou.controller.ui.activity.baseactivity.BaseActivity;
 import cn.mobile.renrentou.controller.ui.fragment.main.CenterFragment;
 import cn.mobile.renrentou.controller.ui.fragment.main.ChatFragment;
@@ -16,6 +19,7 @@ import cn.mobile.renrentou.controller.ui.fragment.main.MainFragment;
 import cn.mobile.renrentou.controller.ui.fragment.main.ProjectFragment;
 import cn.mobile.renrentou.controller.widget.radio.CustomLinearlayout;
 import cn.mobile.renrentou.controller.widget.radio.RadioChangedListener;
+import cn.mobile.renrentou.domain.UserInfo;
 import cn.mobile.renrentou.utils.LogUtils;
 
 /**
@@ -45,12 +49,13 @@ public class MainActivity extends BaseActivity implements RadioChangedListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolBar(toolbar,true);//初始化toolbar
+        setToolBar(toolbar, true);//初始化toolbar
         setSwipeBackEnable(false);//MainActivity不侧滑动
         initFragmentView();//初始化Fragment布局
         customLinearlayout.setOnRadioChangedListener(this);//主菜单监听
         customLinearlayout.setChildStatue(0);//设置默认主菜单为主页面
         setTitle("人人投");
+        UserInfoAction.getInstance(this).getUserInfo();//刷新用户数据
     }
 
     /**
@@ -103,6 +108,10 @@ public class MainActivity extends BaseActivity implements RadioChangedListener{
                 fragmentTransaction.hide(currentFragment).show(centerFragment);
                 currentFragment = centerFragment;
                 setTitle("个人中心");
+                if(allowCenterFragmentRefresh()){
+                    UserInfoAction.getInstance(this).getUserInfo();
+                    ShareStoreAction.getInstance(this).setLong("UserInfoTime", SystemClock.currentThreadTimeMillis());
+                }
                 break;
             default:
                 break;
@@ -141,6 +150,19 @@ public class MainActivity extends BaseActivity implements RadioChangedListener{
         AppManager.getAppManager().removeActivity(this);
     }
     public void onSaveInstanceState(Bundle outState) {
-
+        //防止Fragment销毁之后被保存
+    }
+    public boolean allowCenterFragmentRefresh(){
+        if(!ShareStoreAction.getInstance(this).isLogin()){
+            return false;
+        }
+        long time = ShareStoreAction.getInstance(this).getLong("UserInfoTime");
+        long now = SystemClock.currentThreadTimeMillis();
+        if(time == 0L)
+            return true;//一次也没点击进入 允许刷新
+        if((now - time) < 10 * 1000){
+            return false;
+        }
+        return true;
     }
 }

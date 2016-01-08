@@ -1,38 +1,45 @@
 package cn.mobile.renrentou.controller.ui.fragment.main;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import org.lasque.tusdk.core.TuSdkResult;
 import org.lasque.tusdk.impl.activity.TuFragment;
+import org.xutils.http.RequestParams;
 import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import cn.mobile.renrentou.R;
-import cn.mobile.renrentou.controller.modul.tutusdk.EditAdvancedComponentSimple;
+import cn.mobile.renrentou.app.Constants;
+import cn.mobile.renrentou.app.RRTApplication;
+import cn.mobile.renrentou.controller.http.HttpAction;
+import cn.mobile.renrentou.controller.http.HttpResponseListener;
+import cn.mobile.renrentou.controller.modul.action.UserInfoAction;
 import cn.mobile.renrentou.controller.modul.tutusdk.EditAvatarComponentSimple;
 import cn.mobile.renrentou.controller.modul.tutusdk.ResultAvatar;
 import cn.mobile.renrentou.controller.store.db.UserData;
 import cn.mobile.renrentou.controller.store.db.impl.DbAction;
 import cn.mobile.renrentou.controller.store.sp.impl.ShareStoreAction;
 import cn.mobile.renrentou.controller.ui.activity.LoginActivity;
-import cn.mobile.renrentou.controller.ui.adapter.CenterPanelGridAdapter;
+import cn.mobile.renrentou.controller.ui.adapter.PanelGridAdapter;
 import cn.mobile.renrentou.controller.ui.fragment.basefragment.BaseFragment;
 import cn.mobile.renrentou.controller.widget.gridview.CustomGridView;
 import cn.mobile.renrentou.controller.widget.textview.RiseNumberTextView;
+import cn.mobile.renrentou.domain.Failed;
+import cn.mobile.renrentou.domain.UploadFile;
 import cn.mobile.renrentou.domain.UserInfo;
-import cn.mobile.renrentou.utils.ImageUtils;
 import cn.mobile.renrentou.utils.LogUtils;
+import cn.mobile.renrentou.utils.SolidToast;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -49,7 +56,7 @@ public class CenterFragment extends BaseFragment implements View.OnClickListener
 
     private static final String TAG = "CenterFragment";
     public static CenterFragment intance = null;
-    private ArrayList<CenterPanelGridAdapter.Panel> panellist;
+    private ArrayList<PanelGridAdapter.Panel> panellist;
     /**
      * 头像
      */
@@ -59,7 +66,7 @@ public class CenterFragment extends BaseFragment implements View.OnClickListener
      * 面板
      */
     @ViewInject(R.id.custom_gridview)
-    private CustomGridView customGridVIew;
+    private CustomGridView customGridView;
     /**
      * 增长账户数值
      */
@@ -70,6 +77,17 @@ public class CenterFragment extends BaseFragment implements View.OnClickListener
      */
     @ViewInject(R.id.account_panel)
     private LinearLayout account_panel;
+    /**
+     * 用户名
+     */
+    @ViewInject(R.id.tv_username)
+    private TextView tv_username;
+
+    @ViewInject(R.id.tv_left)
+    private TextView tv_left;
+
+    @ViewInject(R.id.tv_right)
+    private TextView tv_right;
 
     private UserData userData;
     private UserInfo.UserDataEntity userInfo;
@@ -103,23 +121,23 @@ public class CenterFragment extends BaseFragment implements View.OnClickListener
         riseNumberTextView.setDuration(1000);
         riseNumberTextView.start();
         if (panellist == null || panellist.isEmpty()) {
-            panellist = new ArrayList<CenterPanelGridAdapter.Panel>();
-            panellist.add(new CenterPanelGridAdapter().new Panel("我的账户", R.mipmap.i_account));
-            panellist.add(new CenterPanelGridAdapter().new Panel("我的投资", R.mipmap.project_invest));
-            panellist.add(new CenterPanelGridAdapter().new Panel("我的项目", R.mipmap.project_publish));
-            panellist.add(new CenterPanelGridAdapter().new Panel("我的关注", R.mipmap.i_attention));
-            panellist.add(new CenterPanelGridAdapter().new Panel("我的卖出", R.mipmap.chushou_personal));
-            panellist.add(new CenterPanelGridAdapter().new Panel("我的买入", R.mipmap.gmxm_));
-            panellist.add(new CenterPanelGridAdapter().new Panel("扫一扫", R.mipmap.sys_));
-            panellist.add(new CenterPanelGridAdapter().new Panel("人人天使", R.mipmap.sys_));
-            panellist.add(new CenterPanelGridAdapter().new Panel("人人租", R.mipmap.sys_));
-            panellist.add(new CenterPanelGridAdapter().new Panel("人人稳健", R.mipmap.sys_));
-            panellist.add(new CenterPanelGridAdapter().new Panel("人人筹", R.mipmap.sys_));
-            panellist.add(new CenterPanelGridAdapter().new Panel("人人融", R.mipmap.sys_));
+            panellist = new ArrayList<PanelGridAdapter.Panel>();
+            panellist.add(new PanelGridAdapter().new Panel("我的账户", R.mipmap.i_account));
+            panellist.add(new PanelGridAdapter().new Panel("我的投资", R.mipmap.project_invest));
+            panellist.add(new PanelGridAdapter().new Panel("我的项目", R.mipmap.project_publish));
+            panellist.add(new PanelGridAdapter().new Panel("我的关注", R.mipmap.i_attention));
+            panellist.add(new PanelGridAdapter().new Panel("我的卖出", R.mipmap.chushou_personal));
+            panellist.add(new PanelGridAdapter().new Panel("我的买入", R.mipmap.gmxm_));
+            panellist.add(new PanelGridAdapter().new Panel("扫一扫", R.mipmap.sys_));
+            panellist.add(new PanelGridAdapter().new Panel("人人天使", R.mipmap.sys_));
+            panellist.add(new PanelGridAdapter().new Panel("人人租", R.mipmap.sys_));
+            panellist.add(new PanelGridAdapter().new Panel("人人稳健", R.mipmap.sys_));
+            panellist.add(new PanelGridAdapter().new Panel("人人筹", R.mipmap.sys_));
+            panellist.add(new PanelGridAdapter().new Panel("人人融", R.mipmap.sys_));
         }
 
-        customGridVIew.setAdapter(new CenterPanelGridAdapter(activity, panellist));
-        customGridVIew.setOnItemClickListener(this);
+        customGridView.setAdapter(new PanelGridAdapter(activity, panellist));
+        customGridView.setOnItemClickListener(this);
     }
 
     @Override
@@ -168,21 +186,41 @@ public class CenterFragment extends BaseFragment implements View.OnClickListener
      */
     @Override
     public void getAvatar(TuSdkResult tuSdkResult, Error error, TuFragment tuFragment) {
+        RequestParams requestParams = HttpAction.getRequestParams(Constants.BASE_SERVER_URL2 + Constants.UPLOAD_IMG_URL);
         if (tuSdkResult != null && tuSdkResult.imageSqlInfo != null) {
-            circleImageView.setImageBitmap(BitmapFactory.decodeFile(tuSdkResult.imageSqlInfo.path));
+            requestParams.addBodyParameter("pic", new File(tuSdkResult.imageSqlInfo.path));
         } else if (tuSdkResult != null && tuSdkResult.imageFile != null) {
-            circleImageView.setImageBitmap(BitmapFactory.decodeFile(tuSdkResult.imageFile.getAbsolutePath()));
+            requestParams.addBodyParameter("pic", new File(tuSdkResult.imageFile.getAbsolutePath()));
+        } else {
+            return;
         }
+        requestParams.addBodyParameter("type","1");
+        requestParams.setMultipart(true);
+        HttpAction.getInstance(mContext).post(requestParams, UploadFile.class, new HttpResponseListener<UploadFile>() {
+            @Override
+            public void onSuccessForData(UploadFile uploadFile) {
+                UserInfoAction.getInstance(mContext).getUserInfo();
+            }
+
+            @Override
+            public void onSuccessButNoData(Failed failed) {
+                super.onSuccessButNoData(failed);
+                SolidToast.showToast(mContext,failed.getMsg());
+            }
+        });
 
     }
     public void onRefresh(){
-        if(userData!=null){
-            userInfo = userData.getUserInfo();
-        }
-        if(userInfo == null){
+        if(!RRTApplication.isLogin){//先判断是否登录
             return;
         }
-        LogUtils.i("userInfo.getFace()="+userInfo.getFace());
+        if(userData!=null){//判断是否实例化
+            userInfo = userData.getUserInfo();
+        }
+        if(userInfo == null){//判断是否
+            return;
+        }
+        LogUtils.i("userInfo.getFace()=" + userInfo.getFace());
         x.image().bind(circleImageView, userInfo.getFace(),
                 new ImageOptions.Builder()
                         // 如果ImageView的大小不是定义为wrap_content, 不要crop.
@@ -193,5 +231,9 @@ public class CenterFragment extends BaseFragment implements View.OnClickListener
                         .setLoadingDrawableId(R.mipmap.invester_default)
                         .setFailureDrawableId(R.mipmap.invester_default)
                         .build());
+        tv_username.setText(userInfo.getRealname());
+        tv_left.setText(userInfo.getTzf_level()+"级");
+        tv_right.setText(userInfo.getXmf_level()+"级");
+
     }
 }

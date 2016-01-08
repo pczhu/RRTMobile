@@ -18,14 +18,13 @@
         android:orientation="horizontal"
         android:weightSum="5">
 
-        <TextView
+        <cn.mobile.renrentou.controller.widget.textview.ScrollingTextView
             android:id="@+id/title_back"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:layout_weight="1"
             android:gravity="center"
-            android:paddingLeft="5dp"
             android:text=""
             android:textColor="@color/white"
             android:drawableLeft="@mipmap/last"

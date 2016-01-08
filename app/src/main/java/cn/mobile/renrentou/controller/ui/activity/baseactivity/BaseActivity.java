@@ -17,6 +17,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import org.xutils.x;
 
 import cn.mobile.renrentou.R;
+import cn.mobile.renrentou.controller.widget.textview.ScrollingTextView;
 import cn.mobile.renrentou.utils.SystemUtils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
@@ -72,7 +73,7 @@ public class BaseActivity extends SwipeBackActivity {
     public void setToolBar(Toolbar view,boolean back){
         this.toolbar = view;
         toolbar.setPadding(0, SystemUtils.getStatusBarHeight(this), 0, 0);
-        TextView title_back = (TextView) toolbar.findViewById(R.id.title_back);
+        ScrollingTextView title_back = (ScrollingTextView) toolbar.findViewById(R.id.title_back);
         if(!back){
             title_back.setVisibility(View.GONE);
         }else{//退出图标颜色变为白色

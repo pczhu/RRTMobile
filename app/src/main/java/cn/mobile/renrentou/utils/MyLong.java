@@ -10,7 +10,18 @@ package cn.mobile.renrentou.utils;
  * 修改历史：
  */
 public class MyLong {
-    public static Long parseString(String str){
+    /**
+     * 时间戳数据等进行转换
+     * @param str  目标
+     * @return
+     */
+    public static long parseString(String str){
+        if(StringUtils.isEmpty(str)){
+            return 0L;
+        }
+        if(str.contains(".")){
+            str = str.substring(0,str.indexOf("."));
+        }
         try {
             return Long.parseLong(str);
         } catch (NumberFormatException e) {
@@ -18,7 +29,21 @@ public class MyLong {
             return 0L;
         }
     }
-    public static Long parseString(String str,long defaultlong){
+    /**
+     * 时间戳数据等进行转换
+     * @param str  目标
+     * @param defaultlong  转换失败默认值
+     * @return
+     */
+    public static long parseString(String str,long defaultlong){
+        if(StringUtils.isEmpty(str)){
+            return 0L;
+        }
+        if(str.contains(".")){
+            str = str.substring(0,str.indexOf("."));
+        }
+
+
         try {
             return Long.parseLong(str);
         } catch (NumberFormatException e) {

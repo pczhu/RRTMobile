@@ -19,6 +19,7 @@ import cn.mobile.renrentou.app.Constants;
 import cn.mobile.renrentou.controller.http.HttpAction;
 import cn.mobile.renrentou.controller.http.HttpResponseListener;
 import cn.mobile.renrentou.controller.service.UserInfoRefreshService;
+import cn.mobile.renrentou.controller.store.sp.impl.ShareStoreAction;
 import cn.mobile.renrentou.controller.ui.fragment.basefragment.BaseFragment;
 import cn.mobile.renrentou.controller.widget.button.CircularProgressButton;
 import cn.mobile.renrentou.domain.Failed;
@@ -117,6 +118,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener{
                     public void onSuccessForData(LoginInfo loginInfo) {
                         circularButton_login.setProgress(100);
                         circularButtonStateBack();
+                        ShareStoreAction.getInstance(mContext).setIsLogin(true);
                         Intent intent = new Intent(activity, UserInfoRefreshService.class);
                         intent.putExtra("logininfo",loginInfo);
                         activity.startService(intent);

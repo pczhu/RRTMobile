@@ -9,13 +9,12 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ListView
-            android:id="@+id/listview_main"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+        <include layout="@layout/view_mainfragment"/>
 
-        </ListView>
-
+        </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import cn.mobile.renrentou.app.config.InitEveryDependence;
+import cn.mobile.renrentou.controller.modul.action.UserInfoAction;
+import cn.mobile.renrentou.controller.store.sp.impl.ShareStoreAction;
 import cn.mobile.renrentou.utils.LogUtils;
 
 /**
@@ -17,13 +19,17 @@ import cn.mobile.renrentou.utils.LogUtils;
  */
 public class RRTApplication extends Application {
     private static Context mContext;
+    public static boolean isLogin = false;
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext = getContext();
+        initSDK();
+        mContext = this;
+
+        notifyLoginStatue();//本地赋值变量
         initLog();
 
-        initSDK();
+
     }
 
     private void initLog() {
@@ -33,7 +39,7 @@ public class RRTApplication extends Application {
         LogUtils.allowI = false;
         LogUtils.allowV = false;
         LogUtils.allowV = false;
-        LogUtils.allowString = new String[]{"LoginFragment","CenterFragment"};
+        LogUtils.allowString = new String[]{"LoginFragment","MainFragment"};
     }
 
     private void initSDK(){
@@ -41,5 +47,12 @@ public class RRTApplication extends Application {
     }
     public static Context getContext(){
         return mContext;
+    }
+
+    /**
+     * 更新登录状态
+     */
+    public static void notifyLoginStatue(){
+        isLogin = ShareStoreAction.getInstance(mContext).isLogin();
     }
 }

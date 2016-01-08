@@ -43,6 +43,13 @@
             android:theme="@style/AppBaseMainTheme"/>
         <activity android:name=".controller.ui.activity.LoginActivity"
                   android:theme="@style/AppBaseMainTheme"/>
+
+        <!--全局监听广播接受者-->
+        <receiver android:name=".controller.receive.AppReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="refresh_userinfo"/>
+            </intent-filter>
+        </receiver>
         <service android:name=".controller.service.InitServices"/>
         <service android:name=".controller.service.UserInfoRefreshService"/>
         <!-- *******************公共分组控制器******************* -->

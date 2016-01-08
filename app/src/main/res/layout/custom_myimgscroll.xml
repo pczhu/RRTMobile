@@ -6,9 +6,10 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@mipmap/banner_image_default">
 
-        <cn.mobile.renrentou.view.viewpagerscroll.MyImgScroll
+        <cn.mobile.renrentou.controller.widget.viewpagerscroll.MyImgScroll
             android:id="@+id/myvp"
             android:layout_width="fill_parent"
             android:layout_height="140dp"/>

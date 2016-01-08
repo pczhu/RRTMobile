@@ -42,7 +42,7 @@ dependencies {
     //json解析工具
     compile 'com.google.code.gson:gson:2.3.1'
     //xutils
-    compile 'org.xutils:xutils:3.1.24'
+    compile 'org.xutils:xutils:3.1.26'
     //compile files('libs/nineoldandroids-2.4.0.jar')
     //动画效果
     compile 'com.nhaarman.listviewanimations:library:2.6.0'
@@ -54,4 +54,5 @@ dependencies {
     compile project(':FlycoDialog_Lib')
     compile project(':TuSDK')
     compile project(':xedittext')
+    compile files('libs/lite-async-1.0.0.jar')
 }

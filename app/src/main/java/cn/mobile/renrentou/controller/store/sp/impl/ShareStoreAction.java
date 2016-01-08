@@ -72,5 +72,16 @@ public class ShareStoreAction implements ShareStoreData {
     @Override
     public void setIsLogin(boolean flag) {
         getShare(DEFFAULT_SP_NAME).edit().putBoolean(Constants.Login_Tag,flag).commit();
+        RRTApplication.notifyLoginStatue();
+    }
+
+    @Override
+    public void setLong(String shKey,long l) {
+        getShare(DEFFAULT_SP_NAME).edit().putLong(shKey, l);
+    }
+
+    @Override
+    public long getLong(String shKey) {
+        return getShare(DEFFAULT_SP_NAME).getLong(shKey,0L);
     }
 }

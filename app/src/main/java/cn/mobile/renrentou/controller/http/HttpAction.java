@@ -81,6 +81,7 @@ public class HttpAction {
         });
         return cancelable;
     }
+
     public static RequestParams getRequestParams(String url){
         RequestParams requestParams = new RequestParams(url);
         requestParams.setExecutor(ThreadPoolUtils.threadPool);

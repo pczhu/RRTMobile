@@ -44,4 +44,8 @@ public interface ShareStoreData {
     public boolean isLogin();
 
     public void setIsLogin(boolean flag);
+
+    public void setLong(String shKey,long l);
+
+    public long getLong(String shKey);
 }

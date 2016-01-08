@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.flyco.roundview.RoundLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fly="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/servicephone"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginBottom="30dp"
+    android:layout_marginRight="30dp"
+    fly:rv_isRadiusHalfHeight="true"
+    fly:rv_strokeWidth="1dp"
+    fly:rv_strokeColor="#ff6816"
+    android:orientation="vertical"
+    android:gravity="center">
+    <cn.mobile.renrentou.controller.widget.textview.ScrollingTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/service"
+        android:drawablePadding="5dp"
+        android:text="客服热线咨询"
+        android:gravity="center"
+
+        />
+</com.flyco.roundview.RoundLinearLayout>

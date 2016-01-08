@@ -1,15 +1,17 @@
 package cn.mobile.renrentou.controller.modul.action;
 
 import android.content.Context;
+import android.content.Intent;
 
 import cn.mobile.renrentou.app.Constants;
 import cn.mobile.renrentou.controller.http.HttpAction;
 import cn.mobile.renrentou.controller.http.HttpResponseListener;
+import cn.mobile.renrentou.controller.receive.AppReceiver;
 import cn.mobile.renrentou.controller.store.db.UserData;
 import cn.mobile.renrentou.controller.store.db.impl.DbAction;
-import cn.mobile.renrentou.controller.ui.fragment.main.CenterFragment;
+import cn.mobile.renrentou.controller.store.sp.impl.ShareStoreAction;
+import cn.mobile.renrentou.domain.Failed;
 import cn.mobile.renrentou.domain.UserInfo;
-import cn.mobile.renrentou.utils.LogUtils;
 
 /**
  * 名称：UserInfoAction
@@ -43,12 +45,22 @@ public class UserInfoAction {
                         if(userInfo!= null && userInfo.getData()!=null){
                             UserData userData = DbAction.getInstance(mContext);
                             userData.setUserInfo(userInfo.getData());
-                            LogUtils.i("是否是空"+(CenterFragment.intance!=null));
-                            if(CenterFragment.intance != null){
-                                CenterFragment.intance.onRefresh();
-                            }
+                            ShareStoreAction.getInstance(mContext).setIsLogin(true);//设置全局登录状态为YES
+                            sendBroadCaseReceiver();
                         }
                     }
+
+                    @Override
+                    public void onSuccessButNoData(Failed failed) {
+                        super.onSuccessButNoData(failed);
+                        ShareStoreAction.getInstance(mContext).setIsLogin(false);//拿不到数据登录状态为No
+                        sendBroadCaseReceiver();
+                    }
                 });
+    }
+    private void sendBroadCaseReceiver(){
+        Intent intent = new Intent();
+        intent.setAction(AppReceiver.REFRESH_USERINFO);
+        mContext.sendOrderedBroadcast(intent, null);
     }
 }

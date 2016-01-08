@@ -1,7 +1,6 @@
 package cn.mobile.renrentou.controller.ui.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,28 +8,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
 
 import cn.mobile.renrentou.R;
 
+
 /**
- * 名称：CenterPanelGridAdapter
- * 作用：个人中心功能面板
+ * 名称：${FILE_NAME}
+ * 作用：
  * 描述：
  * 作者：pczhu
- * 创建时间： 15/12/30 下午5:01
+ * 创建时间： 16/1/6 上午11:20
  * 版本：V1.0
  * 修改历史：
  */
-public class CenterPanelGridAdapter extends BaseAdapter{
+public class MainStatisticAdapter extends BaseAdapter {
     private ArrayList<Panel> panellist;
     private Context context;
 
-    public CenterPanelGridAdapter() {
+    public MainStatisticAdapter() {
     }
 
-    public CenterPanelGridAdapter(Context context,ArrayList<Panel> panellist) {
+    public MainStatisticAdapter(Context context, ArrayList<Panel> panellist) {
         this.panellist = panellist;
         this.context = context;
     }
@@ -54,29 +52,35 @@ public class CenterPanelGridAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder = null;
         if(convertView == null){
-            convertView = View.inflate(context, R.layout.item_customgridview_fragment_center,null);
+            convertView = View.inflate(context, R.layout.item_customgridview_sa,null);
             holder = new Holder();
-            holder.iv_item= (ImageView)convertView.findViewById(R.id.iv_item);
-            holder.tv_item= (TextView) convertView.findViewById(R.id.tv_item);
+            holder.tv_item_number= (TextView)convertView.findViewById(R.id.tv_item_customgridview_sa_number);
+            holder.tv_item_name= (TextView) convertView.findViewById(R.id.tv_item_customgridview_sa_numbername);
             convertView.setTag(holder);
         }else{
             holder = (Holder) convertView.getTag();
         }
-        holder.tv_item.setText(panellist.get(position).getPanelname());
-        holder.iv_item.setBackground(context.getResources().getDrawable(panellist.get(position).getPanelDrawable()));
+        holder.tv_item_name.setText(panellist.get(position).getPanelname());
+        holder.tv_item_number.setText(panellist.get(position).getPanelnumber());
         return convertView;
     }
+
+    public void notifyDataSetChanged(ArrayList<Panel> panellist) {
+        this.panellist = panellist;
+        super.notifyDataSetChanged();
+    }
+
     public class Holder{
-        ImageView iv_item;
-        TextView tv_item;
+        TextView tv_item_number;
+        TextView tv_item_name;
     }
     public class Panel{
-        public Panel(String panelname,int panelDrawable){
-            this.panelDrawable = panelDrawable;
+        public Panel(String panelname,String panelnumber){
+            this.panelnumber = panelnumber;
             this.panelname = panelname;
         }
         private String panelname;
-        private int panelDrawable;
+        private String panelnumber;
 
         public String getPanelname() {
             return panelname;
@@ -86,12 +90,12 @@ public class CenterPanelGridAdapter extends BaseAdapter{
             this.panelname = panelname;
         }
 
-        public int getPanelDrawable() {
-            return panelDrawable;
+        public String getPanelnumber() {
+            return panelnumber;
         }
 
-        public void setPanelDrawable(int panelDrawable) {
-            this.panelDrawable = panelDrawable;
+        public void setPanelnumber(String panelnumber) {
+            this.panelnumber = panelnumber;
         }
     }
 }
