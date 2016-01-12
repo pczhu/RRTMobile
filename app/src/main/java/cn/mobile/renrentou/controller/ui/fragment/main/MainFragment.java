@@ -51,16 +51,6 @@ import cn.mobile.renrentou.utils.MyLong;
 public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener, View.OnClickListener {
     private static final String TAG = "MainFragment";
 
-//    @InjectView(R.id.title_back)
-//    private TextView leftBack;
-//    @InjectView(R.id.title_name)
-//    private TextView title;
-//    @InjectView(R.id.title_right)
-//    private TextView rightBtn;
-
-//    @ViewInject(R.id.listview_main)
-//    private ListView listview;
-    //
     @ViewInject(R.id.swipe_main)
     private SwipeRefreshLayout swipeRefreshLayout;
     //快捷面板
@@ -179,7 +169,9 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
             @Override
             protected void onPostExecuteSafely(AdData adData, Exception e) throws Exception {
-                swipeRefreshLayout.setRefreshing(false);
+                if(adData == null){
+                    return;
+                }
                 LogUtils.i("执行外部一次");
                 if(adData != null && adData.getData() != null){
                     adData.toString();
@@ -212,13 +204,16 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
-                LogUtils.i("执行请求一次");
+                LogUtils.i("执行网络项目请求一次");
                 return homePro;
             }
 
             @Override
             protected void onPostExecute(HomePro homePro) {
                 super.onPostExecute(homePro);
+                if(homePro == null){
+                    return;
+                }
                 if(mainFragmentAdapter == null){
                     mainFragmentAdapter = new MainFragmentAdapter(mContext,homePro);
                     customListView.setAdapter(mainFragmentAdapter);
@@ -260,7 +255,9 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
             @Override
             protected void onPostExecuteSafely(HomeCount homeCount, Exception e) throws Exception {
-                swipeRefreshLayout.setRefreshing(false);
+                if(homeCount == null){
+                    return;
+                }
                 LogUtils.i("执行外部一次");
                 if(homeCount != null && homeCount.getData() != null){
                     homeCount.toString();

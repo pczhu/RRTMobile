@@ -46,24 +46,12 @@
                     android:textColor="@color/blue"
                     android:textSize="22sp"/>
 
-                <cn.iwgang.countdownview.CountdownView
-                    android:id="@+id/cv_countdownView"
+                <TextView
+                    android:id="@+id/pro_su_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:isShowDay="true"
-                    app:isShowHour="true"
-                    app:isShowMillisecond="false"
-                    app:isShowMinute="true"
-                    app:isShowSecond="true"
-                    app:suffixDay="天"
-                    app:suffixGravity="bottom"
-                    app:suffixHour="小时"
-                    app:suffixMinute="分钟"
-                    app:suffixSecond="秒"
-                    app:suffixTextColor="#000000"
-                    app:suffixTextSize="12sp"
-                    app:timeTextColor="#000000"
-                    app:timeTextSize="22sp"/>
+                    android:textSize="22sp"
+                    android:gravity="center"/>
             </LinearLayout>
 
         </com.flyco.roundview.RoundFrameLayout>

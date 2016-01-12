@@ -1,7 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+    <pw.h57.popupbuttonlibrary.PopupButton
+        android:id="@+id/search_pop1"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="默认"
+        android:textSize="20dp"
+        app:normalBg="@mipmap/tab_bkg_line"
+        app:normalIcon="@mipmap/arrow_down_shop"
+        app:pressBg="@mipmap/tab_bkg_selected"
+        app:pressIcon="@mipmap/arrow_up_shop"
+        android:textColor="@color/black"
+        />
+    <pw.h57.popupbuttonlibrary.PopupButton
+        android:id="@+id/search_pop2"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="默认"
+        android:textSize="20dp"
+        app:normalBg="@mipmap/tab_bkg_line"
+        app:normalIcon="@mipmap/arrow_down_shop"
+        app:pressBg="@mipmap/tab_bkg_selected"
+        app:pressIcon="@mipmap/arrow_up_shop"
+        android:textColor="@color/black"
+        />
+    <pw.h57.popupbuttonlibrary.PopupButton
+        android:id="@+id/search_pop3"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="默认"
+        android:textSize="20dp"
+        app:normalBg="@mipmap/tab_bkg_line"
+        app:normalIcon="@mipmap/arrow_down_shop"
+        app:pressBg="@mipmap/tab_bkg_selected"
+        app:pressIcon="@mipmap/arrow_up_shop"
+        android:textColor="@color/black"
+        />
+    </LinearLayout>
+<FrameLayout
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--不规则的gridview 一行的时候就是ListView-->
+
+        <cn.mobile.renrentou.controller.widget.baserefresh.view.PageStaggeredGridView
+            android:id="@+id/grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:column_count="1"
+            app:item_margin="8dp"
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</FrameLayout>
 </LinearLayout>

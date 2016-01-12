@@ -39,7 +39,7 @@ public class RRTApplication extends Application {
         LogUtils.allowI = false;
         LogUtils.allowV = false;
         LogUtils.allowV = false;
-        LogUtils.allowString = new String[]{"LoginFragment","MainFragment"};
+        LogUtils.allowString = new String[]{"ProjectFragment","MainFragmentAdapter","PageStaggeredGridView"};
     }
 
     private void initSDK(){

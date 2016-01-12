@@ -49,4 +49,19 @@ public class ImageUtils {
                 .setFailureDrawableId(picid)
                 .build();
     }
+    /**
+     * 拿到xutils的option
+     * @return
+     */
+    public static ImageOptions getImageOptions(int picid,ImageView.ScaleType scaleType) {
+        return new ImageOptions.Builder()
+                // 如果ImageView的大小不是定义为wrap_content, 不要crop.
+                //.setCrop(true)
+                // 加载中或错误图片的ScaleType
+                .setPlaceholderScaleType(scaleType)
+                .setImageScaleType(scaleType)
+                .setLoadingDrawableId(picid)
+                .setFailureDrawableId(picid)
+                .build();
+    }
 }
