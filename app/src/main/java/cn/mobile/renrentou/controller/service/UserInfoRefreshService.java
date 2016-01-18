@@ -17,8 +17,8 @@ import cn.mobile.renrentou.domain.dbentity.TokenEntity;
 import cn.mobile.renrentou.utils.LogUtils;
 
 /**
- * 名称：${FILE_NAME}
- * 作用：
+ * 名称：UserInfoRefreshService
+ * 作用：想用这个服务刷新用户UserInfo 的 暂时搁置。没有想到好的刷新方案
  * 描述：
  * 作者：pczhu
  * 创建时间： 16/1/5 上午9:24
@@ -50,4 +50,5 @@ public class UserInfoRefreshService extends Service {
         super.onCreate();
 
     }
+    //TODO 待实现的东西
 }

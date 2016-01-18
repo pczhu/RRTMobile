@@ -39,6 +39,11 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/videobtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@color/green"/>
         </cn.com.video.venvy.param.JjVideoRelativeLayout>
 
 

@@ -64,8 +64,8 @@ dependencies {
     //倒计时
     compile 'com.github.iwgang:countdownview:1.2'
     compile 'com.etsy.android.grid:library:1.0.5'
-    //菜单
-    compile 'com.github.wangjiegulu:RapidFloatingActionButton:1.0.3'
+
+
     //圆滑边框
     compile project(':FlycoRoundView_Lib')
     compile project(':FlycoAnimation_Lib')
@@ -76,4 +76,5 @@ dependencies {
     compile project(':popupbuttonlibrary')
     compile files('libs/AMap_Location_V2.2.0_20151222.jar')
     compile project(':videoJjlibrary')
+    compile project(':rapidfloatinglibrary')
 }
