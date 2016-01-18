@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/TuSDK/TuSDK.iml" filepath="$PROJECT_DIR$/TuSDK/TuSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/popupbuttonlibrary/popupbuttonlibrary.iml" filepath="$PROJECT_DIR$/popupbuttonlibrary/popupbuttonlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/videoJjlibrary/videoJjlibrary.iml" filepath="$PROJECT_DIR$/videoJjlibrary/videoJjlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/xedittext/xedittext.iml" filepath="$PROJECT_DIR$/xedittext/xedittext.iml" />
     </modules>
   </component>

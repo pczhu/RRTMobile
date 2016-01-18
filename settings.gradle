@@ -1,1 +1,1 @@
-include ':app',':FlycoRoundView_Lib',"FlycoAnimation_Lib",'FlycoDialog_Lib','TuSDK','xedittext','popupbuttonlibrary'
+include ':app',':FlycoRoundView_Lib', ':videoJjlibrary',"FlycoAnimation_Lib",'FlycoDialog_Lib','TuSDK','xedittext','popupbuttonlibrary'

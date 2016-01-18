@@ -39,11 +39,12 @@ public class RRTApplication extends Application {
         LogUtils.allowI = false;
         LogUtils.allowV = false;
         LogUtils.allowV = false;
-        LogUtils.allowString = new String[]{"ProjectFragment","MainFragmentAdapter","PageStaggeredGridView"};
+        LogUtils.allowString = new String[]{"InitEveryDependence","ProjectFragment","ProjectDetailActivity"};
     }
 
     private void initSDK(){
-        InitEveryDependence.getInstance(this).start();
+
+        InitEveryDependence.getInstance(this).start(this);
     }
     public static Context getContext(){
         return mContext;

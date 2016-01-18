@@ -2,6 +2,7 @@ package cn.mobile.renrentou.controller.ui.fragment.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -92,10 +93,18 @@ public class CenterFragment extends BaseFragment implements View.OnClickListener
     private UserData userData;
     private UserInfo.UserDataEntity userInfo;
 
+    @ViewInject(R.id.toolbar)
+    private Toolbar toolbar;
+
+    @ViewInject(R.id.title_name)
+    private TextView tv_title;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         intance = this;
+        setToolBar(toolbar,false);
+        setTitle(tv_title,"个人中心");
         initView();
         fillData();
         //onRefresh();

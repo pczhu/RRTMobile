@@ -2,10 +2,12 @@ package cn.mobile.renrentou.controller.ui.fragment.main;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.flyco.roundview.RoundLinearLayout;
 import com.google.gson.Gson;
@@ -76,8 +78,10 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     //服务电话
     @ViewInject(R.id.servicephone)
     private RoundLinearLayout roundLinearLayout;
-
-
+    @ViewInject(R.id.toolbar)
+    private Toolbar toolbar;
+    @ViewInject(R.id.title_name)
+    private TextView tv_title;
 
 
     //数据
@@ -89,9 +93,11 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        setToolBar(toolbar, true);
+        setTitle(tv_title,"人人投");
         initView();
-
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     /**

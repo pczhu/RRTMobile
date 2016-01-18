@@ -2,10 +2,12 @@ package cn.mobile.renrentou.controller.widget.baserefresh;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +28,11 @@ import cn.mobile.renrentou.R;
 import cn.mobile.renrentou.controller.widget.baserefresh.view.LoadingFooter;
 import cn.mobile.renrentou.controller.widget.baserefresh.view.OnLoadNextListener;
 import cn.mobile.renrentou.controller.widget.baserefresh.view.PageStaggeredGridView;
+import cn.mobile.renrentou.controller.widget.textview.ScrollingTextView;
 import cn.mobile.renrentou.domain.Failed;
 import cn.mobile.renrentou.utils.LogUtils;
 import cn.mobile.renrentou.utils.SolidToast;
+import cn.mobile.renrentou.utils.SystemUtils;
 
 
 /**
@@ -40,7 +44,7 @@ import cn.mobile.renrentou.utils.SolidToast;
  * 版本：V1.0
  * 修改历史：
  */
-public abstract class MyBaseFragment extends Fragment
+public abstract class MyBaseFragment<T> extends Fragment
         implements SwipeRefreshLayout.OnRefreshListener, OnLoadNextListener {
     private SwipeRefreshLayout swipeRefreshLayout;
     private PageStaggeredGridView pageStaggeredGridView;
@@ -51,12 +55,12 @@ public abstract class MyBaseFragment extends Fragment
     protected TextView tv_error;
     protected Class<?> clz;
     protected Object obj;
-    protected ArrayList userlist;
+    protected ArrayList<T> userlist;
     protected RequestParams requestParams;
     private boolean injected = false;
     protected Activity activity;
     protected Context mContext;
-
+    private Toolbar toolbar;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -82,7 +86,28 @@ public abstract class MyBaseFragment extends Fragment
             x.view().inject(this, this.getView());
         }
     }
+    public void setToolBar(Toolbar view,boolean back){
+        this.toolbar = view;
+        toolbar.setPadding(0, SystemUtils.getStatusBarHeight(activity), 0, 0);
+//        ScrollingTextView title_back = (ScrollingTextView) toolbar.findViewById(R.id.title_back);
+//        Drawable last = getResources().getDrawable(R.mipmap.last);
+//        if(!back){
+//            title_back.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+//        }else{//退出图标颜色变为白色
+//            title_back.setCompoundDrawablesWithIntrinsicBounds(last, null, null, null);
+//            finished(title_back);
+//        }
+    }
 
+    private void finished(TextView view) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(activity != null)
+                    activity.finish();
+            }
+        });
+    }
 
     @Override
     public void onLoadNext() {

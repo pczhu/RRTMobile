@@ -20,6 +20,19 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.camera.flash" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:name=".app.RRTApplication"
         android:allowBackup="true"
@@ -42,8 +55,25 @@
         <activity android:name=".app.MainActivity"
             android:theme="@style/AppBaseMainTheme"/>
         <activity android:name=".controller.ui.activity.LoginActivity"
-                  android:theme="@style/AppBaseMainTheme"/>
+                  android:theme="@style/AppBaseTheme"/>
+        <activity android:name=".controller.ui.activity.SearchActivity"
+                  android:theme="@style/AppBaseTheme"/>
+        <activity android:name=".controller.ui.activity.ProjectDetailActivity"
+                  android:theme="@style/AppBaseTheme">
+            <meta-data
+                android:name="app_key"
+                android:value="NJQ-jdZde" >
+            </meta-data>
+            <meta-data
+                android:name="app_bundleId"
+                android:value="cn.mobile.renrentou" >
+            </meta-data>
+        </activity>
 
+
+<!--        <service
+            android:name="cn.com.video.venvy.service.VenvyPlayerService"
+            android:process=":videojj" />-->
         <!--全局监听广播接受者-->
         <receiver android:name=".controller.receive.AppReceiver">
             <intent-filter android:priority="1000">
@@ -58,6 +88,12 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <!--地理信息定位 高德定位-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="68b914ce9babd3b054d7202c02a213a7" />
+        <!-- 定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService" />
     </application>
 
 </manifest>

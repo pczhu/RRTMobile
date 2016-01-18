@@ -3,7 +3,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"
+        />
     <cn.mobile.renrentou.controller.widget.scrollview.OverScrollView
         android:id="@+id/OverScroller"
         android:layout_width="match_parent"

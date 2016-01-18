@@ -1,73 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:orientation="vertical"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/fragment_project">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar_search"
+        />
+
+    <LinearLayout
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.xw.repo.xedittext.XEditText
+            android:id="@+id/xedittext"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/login_xedit_gray_bg"
+            android:clickable="true"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:hint="输入关键词搜索项目"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textColor="@color/gray"
+            android:textColorHint="@color/gray"
+            app:x_disableEmoji="true"
+            android:focusable="false"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal">
-    <pw.h57.popupbuttonlibrary.PopupButton
-        android:id="@+id/search_pop1"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:text="默认"
-        android:textSize="20dp"
-        app:normalBg="@mipmap/tab_bkg_line"
-        app:normalIcon="@mipmap/arrow_down_shop"
-        app:pressBg="@mipmap/tab_bkg_selected"
-        app:pressIcon="@mipmap/arrow_up_shop"
-        android:textColor="@color/black"
-        />
-    <pw.h57.popupbuttonlibrary.PopupButton
-        android:id="@+id/search_pop2"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:text="默认"
-        android:textSize="20dp"
-        app:normalBg="@mipmap/tab_bkg_line"
-        app:normalIcon="@mipmap/arrow_down_shop"
-        app:pressBg="@mipmap/tab_bkg_selected"
-        app:pressIcon="@mipmap/arrow_up_shop"
-        android:textColor="@color/black"
-        />
-    <pw.h57.popupbuttonlibrary.PopupButton
-        android:id="@+id/search_pop3"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:text="默认"
-        android:textSize="20dp"
-        app:normalBg="@mipmap/tab_bkg_line"
-        app:normalIcon="@mipmap/arrow_down_shop"
-        app:pressBg="@mipmap/tab_bkg_selected"
-        app:pressIcon="@mipmap/arrow_up_shop"
-        android:textColor="@color/black"
-        />
-    </LinearLayout>
-<FrameLayout
-    android:id="@+id/root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_container"
+        <pw.h57.popupbuttonlibrary.PopupButton
+            android:id="@+id/search_pop1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="默认"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:normalBg="@mipmap/tab_bkg_line"
+            app:normalIcon="@mipmap/arrow_down_shop"
+            app:pressBg="@mipmap/tab_bkg_selected"
+            app:pressIcon="@mipmap/arrow_up_shop"
+            />
+
+        <pw.h57.popupbuttonlibrary.PopupButton
+            android:id="@+id/search_pop2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="默认"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:normalBg="@mipmap/tab_bkg_line"
+            app:normalIcon="@mipmap/arrow_down_shop"
+            app:pressBg="@mipmap/tab_bkg_selected"
+            app:pressIcon="@mipmap/arrow_up_shop"
+            />
+
+        <pw.h57.popupbuttonlibrary.PopupButton
+            android:id="@+id/search_pop3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="默认"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:normalBg="@mipmap/tab_bkg_line"
+            app:normalIcon="@mipmap/arrow_down_shop"
+            app:pressBg="@mipmap/tab_bkg_selected"
+            app:pressIcon="@mipmap/arrow_up_shop"
+            />
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--不规则的gridview 一行的时候就是ListView-->
 
-        <cn.mobile.renrentou.controller.widget.baserefresh.view.PageStaggeredGridView
-            android:id="@+id/grid_view"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:column_count="1"
-            app:item_margin="8dp"
-            />
-    </android.support.v4.widget.SwipeRefreshLayout>
-</FrameLayout>
+            android:layout_height="match_parent">
+            <!--不规则的gridview 一行的时候就是ListView-->
+
+            <cn.mobile.renrentou.controller.widget.baserefresh.view.PageStaggeredGridView
+                android:id="@+id/grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:column_count="1"
+                app:item_margin="8dp"
+                />
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </FrameLayout>
 </LinearLayout>

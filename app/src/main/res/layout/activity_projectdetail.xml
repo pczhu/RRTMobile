@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"
+        />
+
+    <cn.mobile.renrentou.controller.widget.scrollview.OverScrollView
+        android:id="@+id/OverScroller"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgcolor"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include
+                android:id="@+id/view_video"
+                layout="@layout/view_fragment_search_video"/>
+
+
+        </LinearLayout>
+    </cn.mobile.renrentou.controller.widget.scrollview.OverScrollView>
+</LinearLayout>

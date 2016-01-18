@@ -1,30 +1,51 @@
 package cn.mobile.renrentou.controller.ui.fragment.main;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.xw.repo.xedittext.XEditText;
 
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.mobile.renrentou.R;
 import cn.mobile.renrentou.app.Constants;
+import cn.mobile.renrentou.app.RRTApplication;
+import cn.mobile.renrentou.app.config.InitEveryDependence;
 import cn.mobile.renrentou.controller.http.HttpAction;
 import cn.mobile.renrentou.controller.http.HttpResponseListener;
+import cn.mobile.renrentou.controller.ui.activity.ProjectDetailActivity;
+import cn.mobile.renrentou.controller.ui.activity.SearchActivity;
 import cn.mobile.renrentou.controller.ui.adapter.ProjectAdapter;
 import cn.mobile.renrentou.controller.widget.baserefresh.MyBaseFragment;
 import cn.mobile.renrentou.controller.widget.baserefresh.view.PageStaggeredGridView;
 import cn.mobile.renrentou.domain.SearchProject;
 import cn.mobile.renrentou.domain.SearchType;
+import cn.mobile.renrentou.utils.DisplayUtil;
+import cn.mobile.renrentou.utils.LogUtils;
+import cn.mobile.renrentou.utils.SystemUtils;
 import pw.h57.popupbuttonlibrary.PopupButton;
 import pw.h57.popupbuttonlibrary.adapter.PopupAdapter;
 
@@ -38,7 +59,7 @@ import pw.h57.popupbuttonlibrary.adapter.PopupAdapter;
  * 修改历史：
  */
 @ContentView(R.layout.fragment_project)
-public class ProjectFragment extends MyBaseFragment {
+public class ProjectFragment extends MyBaseFragment<SearchProject.DataEntity> implements View.OnClickListener, AdapterView.OnItemClickListener {
     private static final String TAG = "ProjectFragment";
     @ViewInject(R.id.swipe_container)
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -52,20 +73,40 @@ public class ProjectFragment extends MyBaseFragment {
     private PopupButton popupButton2;
     @ViewInject(R.id.search_pop3)
     private PopupButton popupButton3;
-
-
+    @ViewInject(R.id.toolbar)
+    private Toolbar toolbar;
+    @ViewInject(R.id.ib_search)
+    private ImageButton ibsearch;
+    @ViewInject(R.id.search_view)
+    private LinearLayout searchView;
+    @ViewInject(R.id.fragment_project)
+    private LinearLayout linearLayout;
+    @ViewInject(R.id.xedittext)
+    private XEditText xEditText;
     private ProjectAdapter projectAdapter;
     private SearchProject searchProject;
     private List<SearchType.DataEntity.OrderEntity> orderEntities;
     private List<SearchType.DataEntity.SearchEntity> searchEntities;
     private List<SearchType.DataEntity.TradeEntity> tradeEntities;
+    private int height;
+    private float y;
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setToolBar(toolbar, false);
+        initButton();
         initCreatePop();
         initData();
     }
+
+    private void initButton() {
+        ibsearch.setOnClickListener(this);
+        xEditText.setOnClickListener(this);
+        pageStaggeredGridView.setOnItemClickListener(this);
+    }
+
     /**
      * 头部分请求数据并初始化
      */
@@ -97,7 +138,7 @@ public class ProjectFragment extends MyBaseFragment {
         createPop(popupButton1, getStringArray(1));
     }
     private void initCreatePopTwo(){
-        createPop(popupButton2,getStringArray(2));
+        createPop(popupButton2, getStringArray(2));
     }
     private void initCreatePopThree(){
         createPop(popupButton3, getStringArray(3));
@@ -196,4 +237,59 @@ public class ProjectFragment extends MyBaseFragment {
             initCreatePop();
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1){
+            if(resultCode == 1){
+                String result = ((data!=null)?data.getStringExtra("searchTagWord"):"");
+                xEditText.setText(""+result);
+                requestParams.removeParameter("name");
+                requestParams.addBodyParameter("name", result);
+                resetFragment(requestParams).start();
+            }
+            super.onActivityResult(requestCode, resultCode, data);
+
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ib_search :
+                LogUtils.i("" + InitEveryDependence.getInstance(mContext).getDataEntitys().size());
+                android.view.ViewGroup.LayoutParams lp = searchView.getLayoutParams();
+                if (50 == (DisplayUtil.px2dip(mContext, (float) lp.height))) {
+                    lp.height = DisplayUtil.dip2px(mContext, 0.0f);
+                    if(requestParams.getParams("name").size() != 0) {
+                        requestParams.removeParameter("name");
+                        resetFragment(requestParams).start();
+                    }
+                } else {
+                    lp.height = DisplayUtil.dip2px(mContext, 50.0f);
+                }
+                xEditText.setText("");
+                searchView.setLayoutParams(lp);
+                break;
+            case R.id.xedittext:
+                height = searchView.getHeight();
+                Intent intent = new Intent();
+                intent.setClass(mContext, SearchActivity.class);
+                startActivityForResult(intent, 1);
+                activity.overridePendingTransition(R.anim.search_alpha_in, R.anim.search_alpha_out);
+                LogUtils.i("获取到得高度："+y +"启动动画");
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent starter = new Intent(mContext, ProjectDetailActivity.class);
+        starter.putExtra("pid",userlist.get(position).getId());
+        starter.putExtra("pname",userlist.get(position).getName());
+
+        mContext.startActivity(starter);
+    }
+
+
 }
