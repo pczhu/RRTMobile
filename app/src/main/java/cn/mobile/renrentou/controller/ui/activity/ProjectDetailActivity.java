@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,17 +23,15 @@ import java.util.List;
 
 import cn.com.video.venvy.param.JjVideoRelativeLayout;
 import cn.com.video.venvy.param.JjVideoView;
-import cn.com.video.venvy.param.OnJjBufferCompleteListener;
-import cn.com.video.venvy.param.OnJjBufferStartListener;
 import cn.com.video.venvy.param.OnJjBufferingUpdateListener;
 import cn.com.video.venvy.param.OnJjOpenStartListener;
 import cn.com.video.venvy.param.OnJjOpenSuccessListener;
-import cn.com.video.venvy.param.OnJjOutsideLinkClickListener;
 import cn.com.video.venvy.param.VideoJjMediaContoller;
 import cn.mobile.renrentou.R;
 import cn.mobile.renrentou.controller.ui.activity.baseactivity.BaseActivity;
 import cn.mobile.renrentou.controller.ui.adapter.PanelGridAdapter;
 import cn.mobile.renrentou.controller.widget.gridview.CustomGridView;
+import cn.mobile.renrentou.domain.PanelItem;
 import cn.mobile.renrentou.utils.AShapeUtils;
 import cn.mobile.renrentou.utils.DisplayUtil;
 import cn.mobile.renrentou.utils.LogUtils;
@@ -177,43 +174,27 @@ public class ProjectDetailActivity extends BaseActivity implements AdapterView.O
      * 浮动按钮
      */
     private void initRightButton(){
+        List<PanelItem> panelItems = new ArrayList<PanelItem>();
+        panelItems.add(new PanelItem(1,"购买项目",R.mipmap.ico_test_d,0xffff4364,0xff3e2723,Color.WHITE,14,AShapeUtils.generateCornerShapeDrawable(0xaa000000, DisplayUtil.dip2px(this, 4))));
+        panelItems.add(new PanelItem(2,"收藏项目",R.mipmap.ico_test_c,0xfffc9d99,0xff3e2723,Color.WHITE,14,AShapeUtils.generateCornerShapeDrawable(0xaa000000, DisplayUtil.dip2px(this, 4))));
+        panelItems.add(new PanelItem(3,"加入群组",R.mipmap.ico_test_b,0xfff9ccad,0xff3e2723,Color.WHITE,14,AShapeUtils.generateCornerShapeDrawable(0xaa000000, DisplayUtil.dip2px(this, 4))));
+        panelItems.add(new PanelItem(4,"定时购买",R.mipmap.ico_test_a,0xffc9c8aa,0xff84af9b,Color.WHITE,14,AShapeUtils.generateCornerShapeDrawable(0xaa000000, DisplayUtil.dip2px(this, 4))));
         RapidFloatingActionContentLabelList rfaContent = new RapidFloatingActionContentLabelList(this);
         rfaContent.setOnRapidFloatingActionContentLabelListListener(this);
         List<RFACLabelItem> items = new ArrayList<>();
-        items.add(new RFACLabelItem<Integer>()
-                        .setLabel("购买项目")
-                        .setResId(R.mipmap.ico_test_d)
-                        .setIconNormalColor(0xffd84315)
-                        .setIconPressedColor(0xffbf360c)
-                        .setWrapper(0)
-        );
-        items.add(new RFACLabelItem<Integer>()
-                        .setLabel("收藏项目")
-//                        .setResId(R.mipmap.ico_test_c)
-                        .setDrawable(getResources().getDrawable(R.mipmap.ico_test_c))
-                        .setIconNormalColor(0xff4e342e)
-                        .setIconPressedColor(0xff3e2723)
-                        .setLabelColor(Color.WHITE)
-                        .setLabelSizeSp(14)
-                        .setLabelBackgroundDrawable(AShapeUtils.generateCornerShapeDrawable(0xaa000000, DisplayUtil.dip2px(this, 4)))
-                        .setWrapper(1)
-        );
-        items.add(new RFACLabelItem<Integer>()
-                        .setLabel("加入群组")
-                        .setResId(R.mipmap.ico_test_b)
-                        .setIconNormalColor(0xff056f00)
-                        .setIconPressedColor(0xff0d5302)
-                        .setLabelColor(0xff056f00)
-                        .setWrapper(2)
-        );
-        items.add(new RFACLabelItem<Integer>()
-                        .setLabel("定时购买")
-                        .setResId(R.mipmap.ico_test_a)
-                        .setIconNormalColor(0xff283593)
-                        .setIconPressedColor(0xff1a237e)
-                        .setLabelColor(0xff283593)
-                        .setWrapper(3)
-        );
+        for (PanelItem panelItem:panelItems) {
+            items.add(new RFACLabelItem<Integer>()
+                            .setLabel(panelItem.getTitle())
+                            .setResId(panelItem.getResId())
+                            .setIconNormalColor(panelItem.getNormalColor())
+                            .setIconPressedColor(panelItem.getPressColor())
+                            .setLabelColor(panelItem.getLabelColor())
+                            .setLabelSizeSp(panelItem.getLableSize())
+                            .setLabelBackgroundDrawable(panelItem.getLabelBackgroundDrawable())
+                            .setWrapper(panelItem.getId())
+            );
+        }
+
         rfaContent
                 .setItems(items)
                 .setIconShadowRadius(DisplayUtil.dip2px(this, 5))
@@ -239,4 +220,6 @@ public class ProjectDetailActivity extends BaseActivity implements AdapterView.O
     public void onRFACItemIconClick(int i, RFACLabelItem rfacLabelItem) {
         rfabHelper.toggleContent();
     }
+
+
 }
