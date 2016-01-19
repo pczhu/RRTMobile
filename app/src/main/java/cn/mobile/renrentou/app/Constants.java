@@ -73,7 +73,7 @@ public class Constants {
 	public static final String GETBLACKLIST = "user/GetBlackList"+BASESOURCE;
 	public static final String UPLOAD_IMG_URL = "user/SetUploadFile"+BASESOURCE;
 	//获取项目详情	getProjectDetail	 获取项目详情
-	public static final String PROJECT_DETAIL="project/getProjectDetail"+BASESOURCE;
+	public static final String GET_PROJECT_DETAIL="project/getProjectDetail"+BASESOURCE;
 	//项目详情资质审核状态
 	public static final String GEtPROJECTCOMPANY="projectcompany/GetProjectCompany"+BASESOURCE;
 	//项目详情预算与退出机制

@@ -36,6 +36,7 @@ import cn.mobile.renrentou.app.RRTApplication;
 import cn.mobile.renrentou.app.config.InitEveryDependence;
 import cn.mobile.renrentou.controller.http.HttpAction;
 import cn.mobile.renrentou.controller.http.HttpResponseListener;
+import cn.mobile.renrentou.controller.ui.activity.MProjectDetailsActivity;
 import cn.mobile.renrentou.controller.ui.activity.ProjectDetailActivity;
 import cn.mobile.renrentou.controller.ui.activity.SearchActivity;
 import cn.mobile.renrentou.controller.ui.adapter.ProjectAdapter;
@@ -284,7 +285,7 @@ public class ProjectFragment extends MyBaseFragment<SearchProject.DataEntity> im
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent starter = new Intent(mContext, ProjectDetailActivity.class);
+        Intent starter = new Intent(mContext, MProjectDetailsActivity.class);
         starter.putExtra("pid",userlist.get(position).getId());
         starter.putExtra("pname",userlist.get(position).getName());
 

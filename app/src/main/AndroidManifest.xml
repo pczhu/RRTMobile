@@ -58,6 +58,8 @@
                   android:theme="@style/AppBaseTheme"/>
         <activity android:name=".controller.ui.activity.SearchActivity"
                   android:theme="@style/AppBaseTheme"/>
+        <activity android:name=".controller.ui.activity.MProjectDetailsActivity"
+                  android:theme="@style/AppBaseTheme"/>
         <activity android:name=".controller.ui.activity.ProjectDetailActivity"
                   android:theme="@style/AppBaseTheme">
             <meta-data

@@ -43,7 +43,8 @@
                 android:id="@+id/videobtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@color/green"/>
+                android:scaleType="fitXY"
+                android:src="@mipmap/project_default_detail"/>
         </cn.com.video.venvy.param.JjVideoRelativeLayout>
 
 

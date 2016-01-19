@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import cn.mobile.renrentou.app.Constants;
 import cn.mobile.renrentou.app.RRTApplication;
 import cn.mobile.renrentou.controller.store.cache.CacheUtils;
+import cn.mobile.renrentou.controller.store.sp.impl.ShareStoreAction;
 import cn.mobile.renrentou.domain.CityList;
 import cn.mobile.renrentou.domain.HomeCount;
 import cn.mobile.renrentou.utils.FileUtils;
@@ -137,6 +138,9 @@ public class InitEveryDependence implements AMapLocationListener {
         //String result = aMapLocation.getLocationDetail().toString();
         String location = "纬度"+aMapLocation.getLatitude() +"精度"+ aMapLocation.getLongitude();
         LogUtils.i("地理信息位置坐标：" + location + "；详细地址" + aMapLocation.toString());
+        ShareStoreAction shareStoreAction =  ShareStoreAction.getInstance(mContext);
+        shareStoreAction.setString("latitude",aMapLocation.getLatitude()+"");
+        shareStoreAction.setString("longitude",aMapLocation.getLongitude()+"");
     }
     CityList cityList = null;
     /**

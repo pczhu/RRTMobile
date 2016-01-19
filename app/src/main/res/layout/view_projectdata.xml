@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:wave="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:paddingBottom="20dp"
+              android:paddingTop="20dp"
+              android:weightSum="4">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:text="项目地址"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:text="北京"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:layout_marginTop="10dp"
+            android:text="项目分类"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:text="吃喝玩乐"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:layout_marginTop="10dp"
+            android:text="目标金额"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:text="3000万"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:layout_marginTop="10dp"
+            android:text="单笔出资额"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:text="3万"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            >
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <com.john.waveview.WaveView
+                    android:id="@+id/wave_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/wavebg"
+                    android:gravity="center"
+                    wave:above_wave_color="#00CED1"
+                    wave:blow_wave_color="#00BFFF"
+                    wave:progress="50"
+                    wave:wave_height="little"
+                    wave:wave_hz="slow"
+                    wave:wave_length="little"
+                    >
+                </com.john.waveview.WaveView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/pbcount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="50%"
+                android:textSize="26sp"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:text="开始融资时间"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:text="2016-01-02"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:layout_marginTop="10dp"
+            android:text="剩余天数"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:text="20天"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:layout_marginTop="10dp"
+            android:text="共有份数"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:text="100份"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:layout_marginTop="10dp"
+            android:text="剩余份数"/>
+
+        <TextView
+            style="@style/projectdetail_textStyle"
+            android:text="10份"/>
+    </LinearLayout>
+</LinearLayout>
